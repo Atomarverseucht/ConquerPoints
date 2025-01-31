@@ -6,7 +6,7 @@ import javafx.scene.shape.Rectangle;
 
 public class GameController {
 
-    private static final int SIZE = 5; // Spielfeldgröße
+    private static final int SIZE = 10; // Spielfeldgröße
     private static final int CELL_SIZE = 80; // Größe der Felder
 
     @FXML
