@@ -12,7 +12,7 @@ public class GameController {
     public static final int SIZE = 10; // Spielfeldgröße
     public static final int CELL_SIZE = 80; // Größe der Felder
     public static boolean player = false; // false -> blau, sonst rot
-    public static GameCell[][] cells = new GameCell[CELL_SIZE][CELL_SIZE];
+    public static GameCell[][] cells = new GameCell[SIZE][SIZE];
 
     @FXML
     private GridPane gridPane;
