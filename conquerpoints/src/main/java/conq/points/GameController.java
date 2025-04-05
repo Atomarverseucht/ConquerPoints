@@ -13,6 +13,7 @@ public class GameController {
     public static final int CELL_SIZE = 80; // Größe der Felder
     public static boolean player = false; // false -> blau, sonst rot
     public static GameCell[][] cells = new GameCell[SIZE][SIZE];
+    public static int rounds = 0;
 
     @FXML
     private GridPane gridPane;
@@ -49,6 +50,7 @@ public class GameController {
             return;
         }
         playerChange();
+        rounds++;
     }
 
     public static Color getPlayerColor(){

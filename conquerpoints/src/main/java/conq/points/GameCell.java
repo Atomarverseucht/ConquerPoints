@@ -49,28 +49,31 @@ public class GameCell {
 
     public void addV(){
         value += 1;
-        label.setVisible(true);
-        label.setText(Integer.toString(value));
+        if(value>=4){
+            value = 0;
+            label.setVisible(false);
+            rect.setFill(Color.LIGHTGRAY);
+            GameCell[] nbc = neighbourC();
+            for (GameCell neighbour : nbc) {
+                if(neighbour != null){
+                    neighbour.conq();
+                }
+            }
+        } else{
+            label.setVisible(true);
+            label.setText(Integer.toString(value));
+        }
+        
     }
 
     public boolean setPoint(){
-        final Color col = GameController.player ? Color.RED : Color.BLUE;
-        if(rect.getFill().equals(Color.LIGHTGRAY)){
+        final Color col = GameController.getPlayerColor();
+        if(rect.getFill().equals(Color.LIGHTGRAY) && GameController.rounds <= 3){
             rect.setFill(col);
             addV();
             return true;
         } else if(rect.getFill().equals(col)){
             addV();
-            if(getValue() == 4){
-                value = 0;
-                rect.setFill(Color.LIGHTGRAY);
-                GameCell[] nbc = neighbourC();
-                for (GameCell neighbour : nbc) {
-                    if(neighbour != null){
-                        neighbour.conq();
-                    }
-                }
-            }
             return true;
         }
         
