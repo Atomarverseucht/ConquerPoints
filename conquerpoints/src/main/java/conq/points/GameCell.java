@@ -87,13 +87,13 @@ public class GameCell {
     }
 
     public GameCell[] neighbourC(){
-        final GameController gc = new GameController();
+        final int SIZE = GameController.SIZE;
         final GameCell[][] in = GameController.cells;
         GameCell[] out = new GameCell[4];
         if(row > 0) out[0] = in[col][row-1];
         if(col > 0) out[1] = in[col-1][row];
-        if(row < gc.CELL_SIZE) out[2] = in[col][row+1];
-        if(col < gc.CELL_SIZE) out[3] = in[col+1][row];
+        if(row < SIZE) out[2] = in[col][row+1];
+        if(col < SIZE) out[3] = in[col+1][row];
         return out;
     }
 }
