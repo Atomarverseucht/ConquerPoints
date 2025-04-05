@@ -16,6 +16,8 @@ public class GameCell {
         this.label = label;
         this.col = col;
         this.row = row;
+
+        this.label.setTextFill(Color.WHITE);
     }
 
     public Rectangle getRect(){
@@ -48,10 +50,11 @@ public class GameCell {
     public void addV(){
         value += 1;
         label.setVisible(true);
+        label.setText(Integer.toString(value));
     }
 
     public boolean setPoint(){
-        Color col = GameController.player ? Color.RED : Color.BLUE;
+        final Color col = GameController.player ? Color.RED : Color.BLUE;
         if(rect.getFill().equals(Color.LIGHTGRAY)){
             rect.setFill(col);
             addV();
@@ -60,7 +63,13 @@ public class GameCell {
             addV();
             if(getValue() == 4){
                 value = 0;
-
+                rect.setFill(Color.LIGHTGRAY);
+                GameCell[] nbc = neighbourC();
+                for (GameCell neighbour : nbc) {
+                    if(neighbour != null){
+                        neighbour.conq();
+                    }
+                }
             }
             return true;
         }
@@ -68,14 +77,14 @@ public class GameCell {
         return false;
     }
 
-    public void conqCell(){
-        Color col = GameController.player ? Color.RED : Color.BLUE;
+    public void conq(){
+        final Color col = GameController.player ? Color.RED : Color.BLUE;
         rect.setFill(col);
-        
+        addV();
     }
 
     public GameCell[] neighbourC(){
-        GameController gc = new GameController();
+        final GameController gc = new GameController();
         final GameCell[][] in = GameController.cells;
         GameCell[] out = new GameCell[4];
         if(row > 0) out[0] = in[col][row-1];

@@ -32,12 +32,13 @@ public class GameController {
                 int finalRow = row;
                 int finalCol = col;
 
+                label.setVisible(false);
                 // Klick-Event hinzufügen
                 cell.setOnMouseClicked(event -> {
                     clickEvent(cells[finalCol][finalRow]); // Zugriff auf GameCell
                 });
                 
-                gridPane.add(cell, col, row);
+                gridPane.add(cellContainer, col, row);
                 cells[col][row] = new GameCell(cell, label, finalCol, finalRow);
             }
         }
@@ -47,6 +48,19 @@ public class GameController {
         if(!cell.setPoint()) {
             return;
         }
+        playerChange();
+    }
+
+    public static Color getPlayerColor(){
+        return (player ? Color.RED : Color.BLUE);
+    }
+    public static void playerChange(){
         player = !player;
+        final Color c = getPlayerColor();
+        for (GameCell[] gameCells : cells) {
+            for (GameCell gameCell : gameCells) {
+                gameCell.getRect().setStroke(c);
+            }
+        }
     }
 }
